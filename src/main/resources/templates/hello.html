@@ -11,6 +11,7 @@ bbb
         <td>NOME</td>
         <td>PREÇO</td>
         <td>Em Estoque</td>
+        <td>Validade</td>
       </tr>
       <tr th:each="produto : ${produtos}">
         <td><span th:text="${produto.id}"></span></td>
@@ -23,6 +24,8 @@ bbb
         <td><span th:text="${produto.preco}"></span></td>
 
         <td><span th:text="${produto.emEstoque} ? 'estoque' : 'falta'"></span></td>
+
+        <td><span th:text="${#temporals.format(produto.validade, 'dd/MM/yyy')}"></span></td>
       </tr>
   </table>
 

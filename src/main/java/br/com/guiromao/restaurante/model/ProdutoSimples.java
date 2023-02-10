@@ -1,6 +1,7 @@
 package br.com.guiromao.restaurante.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class ProdutoSimples {
     private Integer id;
@@ -8,11 +9,14 @@ public class ProdutoSimples {
     private BigDecimal preco;
     private boolean emEstoque;
 
-    public ProdutoSimples(Integer id, String nome, BigDecimal preco, boolean emEstoque) {
+    private LocalDate validade;
+
+    public ProdutoSimples(Integer id, String nome, BigDecimal preco, boolean emEstoque, LocalDate validade) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.emEstoque = emEstoque;
+        this.validade = validade;
     }
 
     public Integer getId() {return id;}
@@ -23,7 +27,9 @@ public class ProdutoSimples {
 
     public boolean isEmEstoque() {return emEstoque;}
 
+    public LocalDate getValidade() {return validade;}
+
     public String toString() {
-        return id + " - " + nome + " - " + preco + " - " + emEstoque;
+        return id + " - " + nome + " - " + preco + " - " + emEstoque + " - " + validade;
     }
 }
