@@ -6,11 +6,13 @@ public class ProdutoSimples {
     private Integer id;
     private String nome;
     private BigDecimal preco;
+    private boolean emEstoque;
 
-    public ProdutoSimples(Integer id, String nome, BigDecimal preco) {
+    public ProdutoSimples(Integer id, String nome, BigDecimal preco, boolean emEstoque) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+        this.emEstoque = emEstoque;
     }
 
     public Integer getId() {return id;}
@@ -19,7 +21,9 @@ public class ProdutoSimples {
 
     public BigDecimal getPreco() {return preco;}
 
+    public boolean isEmEstoque() {return emEstoque;}
+
     public String toString() {
-        return id + " - " + nome + " - " + preco;
+        return id + " - " + nome + " - " + preco + " - " + emEstoque;
     }
 }

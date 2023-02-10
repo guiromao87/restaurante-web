@@ -4,25 +4,25 @@
 
   Produtos:
   <br /><br />
-
+bbb
   <table>
       <tr>
         <td>ID</td>
         <td>NOME</td>
         <td>PREÇO</td>
+        <td>Em Estoque</td>
       </tr>
       <tr th:each="produto : ${produtos}">
         <td><span th:text="${produto.id}"></span></td>
 
-        <td th:if="${produto.nome != null}">
-          <span th:text="${produto.nome}"></span>
-        </td>
-
-        <td th:if="${produto.nome == null}">
-          -
+        <td>
+          <span th:if="${produto.nome != null}" th:text="${produto.nome}"></span>
+          <span th:if="${produto.nome == null}"> - </span>
         </td>
 
         <td><span th:text="${produto.preco}"></span></td>
+
+        <td><span th:text="${produto.emEstoque} ? 'estoque' : 'falta'"></span></td>
       </tr>
   </table>
 

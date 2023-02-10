@@ -16,10 +16,11 @@ public class HelloController {
 
         model.addAttribute("produtos",
                 Arrays.asList(
-                        new ProdutoSimples(1, "Celular", BigDecimal.TEN),
-                        new ProdutoSimples(2, null, new BigDecimal(20)),
-                        new ProdutoSimples(3, "Video Game", BigDecimal.ONE))
-                );
+                        new ProdutoSimples(1, "Celular", BigDecimal.TEN, true),
+                        new ProdutoSimples(2, null, new BigDecimal(20), true),
+                        new ProdutoSimples(3, "Video Game", BigDecimal.ONE, false)
+                )
+        );
 
         return "hello";
     }
