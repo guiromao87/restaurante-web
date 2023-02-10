@@ -13,7 +13,15 @@
       </tr>
       <tr th:each="produto : ${produtos}">
         <td><span th:text="${produto.id}"></span></td>
-        <td><span th:text="${produto.nome}"></span></td>
+
+        <td th:if="${produto.nome != null}">
+          <span th:text="${produto.nome}"></span>
+        </td>
+
+        <td th:if="${produto.nome == null}">
+          -
+        </td>
+
         <td><span th:text="${produto.preco}"></span></td>
       </tr>
   </table>
