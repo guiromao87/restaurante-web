@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<body xmlns:th="http://www.w3.org/1999/xhtml">
-    Página de produtos: <span th:text="${produtos.size}"></span>
-    <br />
-    Guilherme
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link th:href="@{/produto/css/produto.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/produto/js/produto.js}"></script>
+</head>
+<body>
+    <h2>Título da página</h2>
 
+    <button type="button" th:onclick="alerta()">Alerta</button>
 
-    <div th:replace="~{rodape :: rodape}"></div>
 </body>
 </html>
-
-
