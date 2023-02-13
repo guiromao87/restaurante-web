@@ -15,14 +15,19 @@ public class ProdutoDao {
 
     private static List<Produto> produtos = new ArrayList<>();
 
-    public List<Produto> lista() {
-        produtos.clear();
+    static {
         produtos.add(new Produto(1, "Salada", "Salada de Alface e tomate", Categoria.COMIDA, BigDecimal.TEN));
         produtos.add(new Produto(2, "Frango grelhado", "Acompanha arroz", Categoria.COMIDA, BigDecimal.ONE));
         produtos.add(new Produto(3, "Refrigerante", "Aguá tonica sem açucar", Categoria.BEBIDA, BigDecimal.ZERO));
         produtos.add(new Produto(4, "Brigadeiro", "Brigadeiro de colher", Categoria.SOBREMESA, BigDecimal.ZERO));
+    }
 
+    public List<Produto> lista() {
         return produtos;
+    }
+
+    public void cadastra(Produto produto) {
+        produtos.add(produto);
     }
 
 
