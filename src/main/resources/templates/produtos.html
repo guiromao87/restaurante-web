@@ -4,9 +4,25 @@
     <script type="text/javascript" th:src="@{/produto/js/produto.js}"></script>
 </head>
 <body>
-    <h2>Título da página</h2>
+    <h3>Lista de Produtos</h3>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>Descrição</td>
+            <td>Categoria</td>
+            <td>Preço</td>
+        </tr>
+        <tr th:each="produto : ${produtos}">
+            <td th:text="${produto.id}"></td>
+            <td th:text="${produto.nome}"></td>
+            <td th:text="${produto.descricao}"></td>
+            <td th:text="${produto.categoria.descricao}"></td>
+            <td th:text="${produto.preco}"></td>
+        </tr>
+    </table>
 
-    <button type="button" th:onclick="alerta()">Alerta</button>
+
 
 </body>
 </html>
