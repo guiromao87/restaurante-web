@@ -2,9 +2,7 @@ package br.com.guiromao.restaurante.dao;
 
 import br.com.guiromao.restaurante.model.Categoria;
 import br.com.guiromao.restaurante.model.Produto;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
