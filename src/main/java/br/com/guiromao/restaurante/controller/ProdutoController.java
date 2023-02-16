@@ -8,11 +8,13 @@ import br.com.guiromao.restaurante.model.dto.ProdutoOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,17 +40,19 @@ public class ProdutoController {
     }
 
     @PostMapping("/cadastra")
-    public String cadastra(ProdutoFormInputDto produtoFormInputDto, RedirectAttributes redirectAttributes) {
+    public String cadastra(@Valid ProdutoFormInputDto produtoFormInputDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if(bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().forEach(campoErro -> System.out.println(campoErro.getDefaultMessage()));
+            return "redirect:/produto/form";
+        }
+
         Produto produto = produtoFormInputDto.toProduto();
         this.dao.cadastra(produto);
         redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
         return "redirect:/produto/lista";
     }
 }
-
-// DTO - DATA TRANSFER OBJ
-// Classe de infraestrutura(recebe request e response) -> Modelos
-// Produto -> Objeto de domínio, objetos de dominio devem ser PROTEGIDOS
 
 
 
