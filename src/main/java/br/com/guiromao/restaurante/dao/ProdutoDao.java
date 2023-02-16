@@ -1,5 +1,6 @@
 package br.com.guiromao.restaurante.dao;
 
+import br.com.guiromao.restaurante.dao.mapper.ProdutoMapper;
 import br.com.guiromao.restaurante.model.Categoria;
 import br.com.guiromao.restaurante.model.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,9 @@ public class ProdutoDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private static List<Produto> produtos = new ArrayList<>();
-
-    static {
-        produtos.add(new Produto(1, "Salada", "Salada de Alface e tomate", Categoria.COMIDA, BigDecimal.TEN));
-        produtos.add(new Produto(2, "Frango grelhado", "Acompanha arroz", Categoria.COMIDA, BigDecimal.ONE));
-        produtos.add(new Produto(3, "Refrigerante", "Aguá tonica sem açucar", Categoria.BEBIDA, BigDecimal.ZERO));
-        produtos.add(new Produto(4, "Brigadeiro", "Brigadeiro de colher", Categoria.SOBREMESA, BigDecimal.ZERO));
+    public List<Produto> lista() {
+        return this.jdbcTemplate.query("select * from produtos" , new ProdutoMapper());
     }
-
-    public List<Produto> lista() { return produtos; }
 
     public void cadastra(Produto produto) {
         this.jdbcTemplate.update(
@@ -35,7 +29,6 @@ public class ProdutoDao {
                 produto.getCategoria().getDescricao(),
                 produto.getPreco()
         );
-        produtos.add(produto);
     }
 
 
