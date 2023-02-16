@@ -34,18 +34,16 @@ public class ProdutoController {
     }
 
     @GetMapping("/form")
-    public String form(Model model) {
+    public String form(Model model, ProdutoFormInputDto produtoFormInputDto) {
         model.addAttribute("categorias", Categoria.values());
+        model.addAttribute("produtoFormInputDto", produtoFormInputDto);
         return "form";
     }
 
     @PostMapping("/cadastra")
-    public String cadastra(@Valid ProdutoFormInputDto produtoFormInputDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        if(bindingResult.hasErrors()) {
-            bindingResult.getFieldErrors().forEach(campoErro -> System.out.println(campoErro.getDefaultMessage()));
-            return "redirect:/produto/form";
-        }
+    public String cadastra(@Valid ProdutoFormInputDto produtoFormInputDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if(bindingResult.hasErrors())
+            return form(model, produtoFormInputDto);
 
         Produto produto = produtoFormInputDto.toProduto();
         this.dao.cadastra(produto);

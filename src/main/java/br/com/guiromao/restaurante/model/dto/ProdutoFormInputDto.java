@@ -27,6 +27,22 @@ public class ProdutoFormInputDto {
         this.preco = preco;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
     public Integer getId() {
         return id;
     }

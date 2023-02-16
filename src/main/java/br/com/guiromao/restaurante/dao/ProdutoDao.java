@@ -2,6 +2,8 @@ package br.com.guiromao.restaurante.dao;
 
 import br.com.guiromao.restaurante.model.Categoria;
 import br.com.guiromao.restaurante.model.Produto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -10,6 +12,9 @@ import java.util.List;
 
 @Repository
 public class ProdutoDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     private static List<Produto> produtos = new ArrayList<>();
 
@@ -20,11 +25,16 @@ public class ProdutoDao {
         produtos.add(new Produto(4, "Brigadeiro", "Brigadeiro de colher", Categoria.SOBREMESA, BigDecimal.ZERO));
     }
 
-    public List<Produto> lista() {
-        return produtos;
-    }
+    public List<Produto> lista() { return produtos; }
 
     public void cadastra(Produto produto) {
+        this.jdbcTemplate.update(
+                "insert into produtos (nome,descricao,categoria,preco) values (?,?,?,?)",
+                produto.getNome(),
+                produto.getDescricao(),
+                produto.getCategoria().getDescricao(),
+                produto.getPreco()
+        );
         produtos.add(produto);
     }
 

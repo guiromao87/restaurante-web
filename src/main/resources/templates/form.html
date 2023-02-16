@@ -1,10 +1,9 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
     <body>
         <h2>Cadastro de Produto</h2>
-        <form action="/produto/cadastra" method="post">
-            Id: <input type="text" name="id" /> <br />
-            Nome: <input type="text" name="nome" /> <br />
-            Descrição: <input type="text" name="descricao" /> <br />
+        <form th:object="${produtoFormInputDto}" action="/produto/cadastra" method="post">
+            Nome: <input th:field="*{nome}" /> <span th:errors="*{nome}"></span> <br />
+            Descrição: <input th:field="*{descricao}" /> <span th:errors="*{descricao}"></span><br />
 
             Categoria:
             <select name="categoria">
@@ -12,7 +11,7 @@
             </select>
             <br />
 
-            Preço: <input type="text" name="preco" /> <br /><br />
+            Preço: <input th:field="*{preco}" /> <span th:errors="*{preco}"></span><br /><br />
 
             <input type="submit" value="Cadastra" />
         </form>
