@@ -20,4 +20,8 @@ public class ProdutoDao {
     public void cadastra(Produto produto) {
         this.entityManager.persist(produto);
     }
+
+    public Produto buscaPor(Integer id) { return this.entityManager.find(Produto.class, id); }
+
+    
 }
