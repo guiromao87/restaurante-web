@@ -3,6 +3,7 @@ package br.com.guiromao.restaurante.controller;
 import br.com.guiromao.restaurante.dao.ProdutoDao;
 import br.com.guiromao.restaurante.model.Categoria;
 import br.com.guiromao.restaurante.model.Produto;
+import br.com.guiromao.restaurante.model.dto.ProdutoAlteraInputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoDetalheOutputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoFormInputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoOutputDto;
@@ -25,6 +26,7 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoDao dao;
+
 
     @GetMapping("/lista")
     public String lista(Model model) {
@@ -56,6 +58,34 @@ public class ProdutoController {
     public String detalhe(@PathVariable Integer id, Model model) {
         model.addAttribute("produto", new ProdutoDetalheOutputDto(this.dao.buscaPor(id)));
         return "detalhe";
+    }
+
+    @Transactional
+    @GetMapping("/deleta")
+    public String deleta(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
+        this.dao.deleta(id);
+        redirectAttributes.addFlashAttribute("sucesso", "Produto deletado com sucesso!");
+        return "redirect:/produto/lista";
+    }
+
+    @GetMapping("/preparaAltera")
+    public String preparaAltera(@RequestParam("id") Integer id, Model model) {
+        model.addAttribute("produto", this.dao.buscaPor(id));
+        model.addAttribute("categorias", Categoria.values());
+        return "form-altera";
+    }
+
+    @Transactional
+    @PostMapping("/atualiza")
+    public String atualiza(ProdutoAlteraInputDto dto, RedirectAttributes redirectAttributes) {
+        Produto produto = this.dao.buscaPor(dto.getId());
+        produto.setNome(dto.getNome());
+        produto.setDescricao(dto.getDescricao());
+        produto.setCategoria(dto.getCategoria());
+        produto.setPreco(dto.getPreco());
+
+        redirectAttributes.addFlashAttribute("sucesso", "Produto alterado com sucesso");
+        return "redirect:/produto/lista";
     }
 }
 
