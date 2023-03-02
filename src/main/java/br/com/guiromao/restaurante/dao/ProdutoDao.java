@@ -1,8 +1,8 @@
 package br.com.guiromao.restaurante.dao;
 
 import br.com.guiromao.restaurante.model.Produto;
-import br.com.guiromao.restaurante.model.dto.ProdutoAlteraInputDto;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;

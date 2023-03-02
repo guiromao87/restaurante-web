@@ -2,9 +2,6 @@ package br.com.guiromao.restaurante.model.dto;
 
 import br.com.guiromao.restaurante.model.Categoria;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class ProdutoAlteraInputDto {
