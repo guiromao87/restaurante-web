@@ -19,7 +19,7 @@ public class Cliente {
     private String senha;
     private boolean ativo;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Cliente() {}

@@ -1,6 +1,9 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
     <h3>Login de Usuário</h3>
+    <br />
+    <span th:text="${usuarioInvalido}"></span>
+    <br />
     <form action="/login" method="post">
         Email: <input type="text" name="email" /><br />
         Senha: <input type="text" name="senha" /><br />
