@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+  <form action="/endereco/pesquisa">
+    <input type="hidden" name="id" th:value="${idCliente}">
+    CEP: <input type="text" name="cep" /><br />
+    <br />
+
+    <input type="submit" value="Pesquisar" />
+  </form>
+  <br />
+  <a th:href="@{/cliente/lista}">voltar</a>
+</body>
+</html>

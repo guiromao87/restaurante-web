@@ -5,8 +5,8 @@
     <br />
     <form action="/endereco/cadastra" method="post">
         <input type="hidden" name="id" th:value="${cliente.id}">
-        Cep: <input type="text" name="cep" size="10"/><br />
-        Rua: <input type="text" name="rua" size="30" /><br />
+        Cep: <input type="text" name="cep" th:value="${cep}" size="10"/><br />
+        Rua: <input type="text" name="rua" th:value="${rua}" size="30" /><br />
 
         <br />
         <input type="submit" value="Cadastra" />
