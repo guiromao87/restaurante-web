@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+  <h3>Clientes cadastrados</h3>
+  <a th:href="@{/cliente/form}">cadastra cliente</a>
+  <table>
+    <tr>
+      <td>id</td>
+      <td>nome</td>
+      <td>email</td>
+      <td>ativo</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr th:each="cliente : ${clientes}">
+      <td>
+        <a th:href="@{/cliente/buscaEndereco(id=${cliente.id})}" th:text="${cliente.id}"></a>
+      </td>
+      <td th:text="${cliente.nome}"></td>
+      <td th:text="${cliente.email}"></td>
+      <td th:text="${cliente.ativo} == true ? 'Ativo' : 'Inativo'"></td>
+      <td>
+        <a th:href="@{/cliente/desativa(id=${cliente.id})}">desativa</a>
+      </td>
+      <td>
+        <a th:href="@{/endereco/form(id=${cliente.id})}">cadastra endereço</a>
+      </td>
+
+    </tr>
+  </table>
+</body>
+</html>

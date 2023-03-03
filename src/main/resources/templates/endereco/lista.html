@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    Endereços do Cliente: <span th:text="${cliente.nome}"></span>
+    <table>
+        <tr>
+            <td>Cep</td>
+            <td>Rua</td>
+        </tr>
+        <tr th:each="endereco : ${enderecos}">
+            <td th:text="${endereco.cep}"></td>
+            <td th:text="${endereco.rua}"></td>
+        </tr>
+    </table>
+</body>
+</html>

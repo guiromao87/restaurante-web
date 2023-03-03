@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+  <h3>Cadastro de Cliente</h3>
+  <form action="/cliente/cadastra" method="post">
+    Nome: <input type="text" name="nome" /><br />
+    Email: <input type="text" name="email" /><br />
+    Senha: <input type="text" name="senha" /><br />
+
+    <br />
+    <input type="submit" value="Cadastra" />
+  </form>
+
+  <a th:href="@{/cliente/lista}">voltar</a>
+</body>
+</html>
