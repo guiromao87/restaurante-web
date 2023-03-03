@@ -20,4 +20,12 @@ public class ClienteDao {
     }
 
     public Cliente buscaPor(Integer id) { return this.em.find(Cliente.class, id); }
+
+    public Cliente existe(String email, String senha) {
+        String jpql = "select c from Cliente c WHERE c.email = :email AND c.senha = :senha";
+        return this.em.createQuery(jpql, Cliente.class)
+                .setParameter("email", email)
+                .setParameter("senha", senha)
+                .getSingleResult();
+    }
 }
