@@ -4,7 +4,7 @@
     <script type="text/javascript" th:src="@{/produto/js/produto.js}"></script>
 </head>
 <body>
-    Cliente: <span th:text="${session.logado.nome}"></span>
+    Cliente: <span th:text="${session.logado.nome}"></span> - <a th:href="@{/logout}">sair</a>
     <h3>Lista de Produtos</h3>
     <a th:href="@{/produto/form}">Cadastra produto</a>
 
@@ -33,6 +33,7 @@
             </td>
         </tr>
     </table>
+
 
 
 
