@@ -2,6 +2,7 @@ package br.com.guiromao.restaurante.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "produtos")
@@ -53,5 +54,18 @@ public class Produto {
                 ", categoria=" + categoria +
                 ", preco=" + preco +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(getId(), produto.getId()) && Objects.equals(getNome(), produto.getNome()) && Objects.equals(getDescricao(), produto.getDescricao()) && getCategoria() == produto.getCategoria() && Objects.equals(getPreco(), produto.getPreco());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNome(), getDescricao(), getCategoria(), getPreco());
     }
 }

@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+  <h3>Compra finalizada com sucesso!</h3>
+  Cliente: <span th:text="${cliente.nome}"></span><br />
+  Endereço de entrega: <span th:text="${endereco.rua}"></span>
+
+  <ul th:each="compra : ${compras}">
+    <li th:text="${compra.produto.nome}"></li>
+  </ul>
+</body>
+</html>

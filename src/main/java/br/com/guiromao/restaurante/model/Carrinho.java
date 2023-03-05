@@ -30,4 +30,17 @@ public class Carrinho {
 
         return total;
     }
+
+    public void remove(Produto produto, Integer quantidade) {
+        ItemDeCompra novoItem = new ItemDeCompra(produto, quantidade);
+        int index = this.compras.indexOf(novoItem);
+
+        ItemDeCompra itemDaLista = this.compras.get(index);
+
+        if(itemDaLista.getQuantidade() == 1) {
+            this.compras.remove(itemDaLista);
+        } else {
+            itemDaLista.setQuantidade(itemDaLista.getQuantidade() - 1);
+        }
+    }
 }

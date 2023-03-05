@@ -16,7 +16,6 @@ public class EnderecoDao {
 
     public void cadastra(Endereco endereco) { this.em.persist(endereco); }
 
-    public List<Endereco> enderecosPor(Cliente cliente) {
-        return null;
-    }
+    public Endereco buscaPor(Integer id) { return this.em.find(Endereco.class, id); }
+
 }
