@@ -6,17 +6,22 @@ import br.com.guiromao.restaurante.model.Produto;
 import java.math.BigDecimal;
 
 public class ProdutoDetalheOutputDto {
+
+    private Integer id;
     private String nome;
     private String descricao;
     private Categoria categoria;
     private BigDecimal preco;
 
     public ProdutoDetalheOutputDto(Produto produto) {
+        this.id = produto.getId();
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
         this.categoria = produto.getCategoria();
         this.preco = produto.getPreco();
     }
+
+    public Integer getId() { return id; }
 
     public String getNome() {return nome;}
 

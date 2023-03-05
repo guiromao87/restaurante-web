@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+  <h3>Detalhe da compra</h3>
+  Cliente: <span th:text="${session.logado.nome}"></span>
+
+  <table>
+      <tr>
+        <td>Produto</td>
+        <td>Preço</td>
+        <td>Quantidade</td>
+      </tr>
+      <tr th:each="item : ${compras}">
+        <td th:text="${item.produto.nome}"></td>
+        <td th:text="${item.produto.preco}"></td>
+        <td th:text="${item.quantidade}"></td>
+      </tr>
+  </table>
+  <br />
+  Total: <span th:text="${total}"></span>
+
+
+</body>
+</html>

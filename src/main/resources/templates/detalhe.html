@@ -8,6 +8,13 @@
     <b>Preço:</b>  <span th:text="${produto.preco}"></span><br />
 
     <br />
+    <form action="/carrinho/add" method="post">
+        <input type="hidden" name="idProduto" th:value="${produto.id}">
+        <input type="text" name="quantidade" size="3" />
+        <input type="submit" value="Add ao Carrinho" />
+    </form>
+
+    <br />
     <a th:href="@{/produto/lista}">voltar</a>
 
 </body>

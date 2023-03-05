@@ -4,9 +4,13 @@
     <script type="text/javascript" th:src="@{/produto/js/produto.js}"></script>
 </head>
 <body>
-    Cliente: <span th:text="${session.logado.nome}"></span> - <a th:href="@{/logout}">sair</a>
+    Cliente: <a th:href="@{/carrinho/detalhe}" th:text="${session.logado.nome}" ></a> - <a th:href="@{/logout}">sair</a>
     <h3>Lista de Produtos</h3>
     <a th:href="@{/produto/form}">Cadastra produto</a>
+
+    <br />
+        <a th:href="@{/carrinho/total}">total</a>
+    <br />
 
 
     <span th:text="${sucesso}"></span>
