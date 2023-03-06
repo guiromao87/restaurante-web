@@ -2,6 +2,7 @@ package br.com.guiromao.restaurante.controller;
 
 import br.com.guiromao.restaurante.dao.FuncionarioDao;
 import br.com.guiromao.restaurante.model.Funcionario;
+import br.com.guiromao.restaurante.model.dto.FuncionarioAlteraInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,21 @@ public class FuncionarioController {
 
         return dto;
     }
+    
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void deleta(@PathVariable Integer id) {
+        this.funcionarioDao.remove(id);
+    }
+
+    // localhost:8080/funcionarios - PUT
+    @Transactional
+    @PutMapping
+    public void altera(@RequestBody FuncionarioAlteraInputDto dto) {
+        Funcionario funcionario = this.funcionarioDao.buscaPor(dto.getId());
+        funcionario.setEmail(dto.getEmail());
+        funcionario.setSalario(dto.getSalario());
+    }
+
+
 }

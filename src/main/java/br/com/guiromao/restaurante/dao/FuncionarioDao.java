@@ -24,4 +24,9 @@ public class FuncionarioDao {
     public Funcionario buscaPor(Integer id) {
         return this.em.find(Funcionario.class, id);
     }
+
+    public void remove(Integer id) {
+        Funcionario funcionario = this.em.find(Funcionario.class, id);
+        this.em.remove(funcionario);
+    }
 }
