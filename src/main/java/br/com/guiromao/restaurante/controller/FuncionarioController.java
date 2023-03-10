@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -42,10 +43,14 @@ public class FuncionarioController {
     // localhost:8080/funcionarios/id - GET
     @GetMapping("/{id}")
     public FuncionarioOutputDto buscaPor(@PathVariable Integer id) {
-        Funcionario funcionario = this.funcionarioDao.findById(id).get();
-        FuncionarioOutputDto dto = new FuncionarioOutputDto(funcionario);
+        List<Funcionario> funcionarios = this.funcionarioDao.findFuncionarios("Rita", "rita@gmail.com", new BigDecimal(2000.00));
+        System.out.println(funcionarios.get(0).getNome());
 
-        return dto;
+
+//        Funcionario funcionario = this.funcionarioDao.findById(id).get();
+//        FuncionarioOutputDto dto = new FuncionarioOutputDto(funcionario);
+
+        return null;
     }
     
     @Transactional

@@ -1,6 +1,5 @@
 package br.com.guiromao.restaurante.controller;
 
-import br.com.guiromao.restaurante.dao.ClienteDao;
 import br.com.guiromao.restaurante.model.Cliente;
 import br.com.guiromao.restaurante.model.Endereco;
 import br.com.guiromao.restaurante.model.dto.EnderecoInputDto;
