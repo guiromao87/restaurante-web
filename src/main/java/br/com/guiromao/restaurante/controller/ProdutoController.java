@@ -1,12 +1,13 @@
 package br.com.guiromao.restaurante.controller;
 
-import br.com.guiromao.restaurante.dao.ProdutoDao;
+
 import br.com.guiromao.restaurante.model.Categoria;
 import br.com.guiromao.restaurante.model.Produto;
 import br.com.guiromao.restaurante.model.dto.ProdutoAlteraInputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoDetalheOutputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoFormInputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoOutputDto;
+import br.com.guiromao.restaurante.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoDao dao;
+    private ProdutoRepository dao;
 
 
     @GetMapping("/lista")
@@ -34,7 +35,7 @@ public class ProdutoController {
         if(session.getAttribute("logado") == null)
             return "redirect:/";
 
-        List<ProdutoOutputDto> produtosDto = dao.lista().stream().map(produto -> new ProdutoOutputDto(produto)).collect(Collectors.toList());
+        List<ProdutoOutputDto> produtosDto = dao.findAll().stream().map(produto -> new ProdutoOutputDto(produto)).collect(Collectors.toList());
         model.addAttribute("produtos", produtosDto);
         return "produtos";
     }
@@ -53,28 +54,28 @@ public class ProdutoController {
             return form(model, produtoFormInputDto);
 
         Produto produto = produtoFormInputDto.toProduto();
-        this.dao.cadastra(produto);
+        this.dao.save(produto);
         redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso!");
         return "redirect:/produto/lista";
     }
 
     @GetMapping("/detalhe/{id}")
     public String detalhe(@PathVariable Integer id, Model model) {
-        model.addAttribute("produto", new ProdutoDetalheOutputDto(this.dao.buscaPor(id)));
+        model.addAttribute("produto", new ProdutoDetalheOutputDto(this.dao.findById(id).get()));
         return "detalhe";
     }
 
     @Transactional
     @GetMapping("/deleta")
     public String deleta(@RequestParam("id") Integer id, RedirectAttributes redirectAttributes) {
-        this.dao.deleta(id);
+        this.dao.deleteById(id);
         redirectAttributes.addFlashAttribute("sucesso", "Produto deletado com sucesso!");
         return "redirect:/produto/lista";
     }
 
     @GetMapping("/preparaAltera")
     public String preparaAltera(@RequestParam("id") Integer id, Model model) {
-        model.addAttribute("produto", this.dao.buscaPor(id));
+        model.addAttribute("produto", this.dao.findById(id).get());
         model.addAttribute("categorias", Categoria.values());
         return "form-altera";
     }
@@ -82,7 +83,7 @@ public class ProdutoController {
     @Transactional
     @PostMapping("/atualiza")
     public String atualiza(ProdutoAlteraInputDto dto, RedirectAttributes redirectAttributes) {
-        Produto produto = this.dao.buscaPor(dto.getId());
+        Produto produto = this.dao.findById(dto.getId()).get();
         produto.setNome(dto.getNome());
         produto.setDescricao(dto.getDescricao());
         produto.setCategoria(dto.getCategoria());

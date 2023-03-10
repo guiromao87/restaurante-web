@@ -1,14 +1,13 @@
 package br.com.guiromao.restaurante.controller;
 
-import br.com.guiromao.restaurante.dao.FuncionarioDao;
 import br.com.guiromao.restaurante.model.Funcionario;
 import br.com.guiromao.restaurante.model.dto.FuncionarioAlteraInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioOutputDto;
+import br.com.guiromao.restaurante.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +18,14 @@ import java.util.List;
 public class FuncionarioController {
 
     @Autowired
-    private FuncionarioDao funcionarioDao;
+    private FuncionarioRepository funcionarioDao;
 
     // localhost:8080/funcionarios - POST
     @Transactional
     @PostMapping
     public ResponseEntity cadastra(@RequestBody FuncionarioInputDto dto) {
         Funcionario funcionario = dto.toFuncionario();
-        funcionarioDao.cadastra(funcionario);
+        funcionarioDao.save(funcionario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
@@ -34,7 +33,7 @@ public class FuncionarioController {
     // localhost:8080/funcionarios - GET
     @GetMapping
     public List<FuncionarioOutputDto> lista() {
-        List<Funcionario> funcionarios = this.funcionarioDao.lista();
+        List<Funcionario> funcionarios = this.funcionarioDao.findAll();
         List<FuncionarioOutputDto> funcionarioOutputDtoList =  funcionarios.stream().map(funcionario -> new FuncionarioOutputDto(funcionario)).toList();
 
         return funcionarioOutputDtoList;
@@ -43,7 +42,7 @@ public class FuncionarioController {
     // localhost:8080/funcionarios/id - GET
     @GetMapping("/{id}")
     public FuncionarioOutputDto buscaPor(@PathVariable Integer id) {
-        Funcionario funcionario = this.funcionarioDao.buscaPor(id);
+        Funcionario funcionario = this.funcionarioDao.findById(id).get();
         FuncionarioOutputDto dto = new FuncionarioOutputDto(funcionario);
 
         return dto;
@@ -52,14 +51,14 @@ public class FuncionarioController {
     @Transactional
     @DeleteMapping("/{id}")
     public void deleta(@PathVariable Integer id) {
-        this.funcionarioDao.remove(id);
+        this.funcionarioDao.deleteById(id);
     }
 
     // localhost:8080/funcionarios - PUT
     @Transactional
     @PutMapping
     public void altera(@RequestBody FuncionarioAlteraInputDto dto) {
-        Funcionario funcionario = this.funcionarioDao.buscaPor(dto.getId());
+        Funcionario funcionario = this.funcionarioDao.findById(dto.getId()).get();
         funcionario.setEmail(dto.getEmail());
         funcionario.setSalario(dto.getSalario());
     }
