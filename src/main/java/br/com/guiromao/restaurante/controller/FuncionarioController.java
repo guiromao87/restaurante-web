@@ -36,20 +36,8 @@ public class FuncionarioController {
     }
 
     @GetMapping("/pagina")
-    public List<Funcionario> listaOrdenada() {
-        // 12 elementos
-        // 3 páginas
-        // 0 - 5 registros
-        // 1 - 5 registros
-        // 2 - 2 registros
-
-        Page<Funcionario> pagina =  this.funcionarioDao.findAll(PageRequest.of(2, 5));
-        System.out.println("Total de elementos: " + pagina.getTotalElements());
-        System.out.println("Total de páginas: " + pagina.getTotalPages());
-        System.out.println("Num de elementos: " + pagina.getNumberOfElements());
-        System.out.println("numero da página: " + pagina.getNumber());
-
-        return pagina.getContent();
+    public Page<Funcionario> listaOrdenada(Pageable pageable) {
+        return this.funcionarioDao.findAll(pageable);
     }
 
     @GetMapping
