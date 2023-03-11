@@ -14,5 +14,4 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
         nativeQuery = true
     )
     List<Funcionario> findFuncionarios(String nome, String email, BigDecimal salario);
-
 }

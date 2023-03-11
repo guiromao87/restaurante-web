@@ -6,6 +6,10 @@ import br.com.guiromao.restaurante.model.dto.FuncionarioInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioOutputDto;
 import br.com.guiromao.restaurante.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +25,7 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioRepository funcionarioDao;
 
-    // localhost:8080/funcionarios - POST
+
     @Transactional
     @PostMapping
     public ResponseEntity cadastra(@RequestBody FuncionarioInputDto dto) {
@@ -31,7 +35,23 @@ public class FuncionarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
-    // localhost:8080/funcionarios - GET
+    @GetMapping("/pagina")
+    public List<Funcionario> listaOrdenada() {
+        // 12 elementos
+        // 3 páginas
+        // 0 - 5 registros
+        // 1 - 5 registros
+        // 2 - 2 registros
+
+        Page<Funcionario> pagina =  this.funcionarioDao.findAll(PageRequest.of(2, 5));
+        System.out.println("Total de elementos: " + pagina.getTotalElements());
+        System.out.println("Total de páginas: " + pagina.getTotalPages());
+        System.out.println("Num de elementos: " + pagina.getNumberOfElements());
+        System.out.println("numero da página: " + pagina.getNumber());
+
+        return pagina.getContent();
+    }
+
     @GetMapping
     public List<FuncionarioOutputDto> lista() {
         List<Funcionario> funcionarios = this.funcionarioDao.findAll();
@@ -40,17 +60,13 @@ public class FuncionarioController {
         return funcionarioOutputDtoList;
     }
 
-    // localhost:8080/funcionarios/id - GET
+
     @GetMapping("/{id}")
     public FuncionarioOutputDto buscaPor(@PathVariable Integer id) {
-        List<Funcionario> funcionarios = this.funcionarioDao.findFuncionarios("Rita", "rita@gmail.com", new BigDecimal(2000.00));
-        System.out.println(funcionarios.get(0).getNome());
+        Funcionario funcionario = this.funcionarioDao.findById(id).get();
+        FuncionarioOutputDto dto = new FuncionarioOutputDto(funcionario);
 
-
-//        Funcionario funcionario = this.funcionarioDao.findById(id).get();
-//        FuncionarioOutputDto dto = new FuncionarioOutputDto(funcionario);
-
-        return null;
+        return dto;
     }
     
     @Transactional
@@ -59,7 +75,7 @@ public class FuncionarioController {
         this.funcionarioDao.deleteById(id);
     }
 
-    // localhost:8080/funcionarios - PUT
+
     @Transactional
     @PutMapping
     public void altera(@RequestBody FuncionarioAlteraInputDto dto) {
