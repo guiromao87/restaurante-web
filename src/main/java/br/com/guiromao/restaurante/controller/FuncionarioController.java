@@ -7,15 +7,13 @@ import br.com.guiromao.restaurante.model.dto.FuncionarioOutputDto;
 import br.com.guiromao.restaurante.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -36,7 +34,7 @@ public class FuncionarioController {
     }
 
     @GetMapping("/pagina")
-    public Page<Funcionario> listaOrdenada(Pageable pageable) {
+    public Page<Funcionario> listaOrdenada(@PageableDefault(page = 0, size = 5) Pageable pageable) {
         return this.funcionarioDao.findAll(pageable);
     }
 
