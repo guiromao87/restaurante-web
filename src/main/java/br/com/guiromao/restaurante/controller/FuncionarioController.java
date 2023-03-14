@@ -33,7 +33,6 @@ public class FuncionarioController {
     @Transactional
     @PostMapping
     public ResponseEntity cadastra(@RequestBody FuncionarioInputDto dto) {
-//        Cargo cargo = this.cargoRepository.findById(dto.getCargoId()).get();
         Cargo cargo = this.cargoRepository.getReferenceById(dto.getCargoId());
 
         Funcionario funcionario = dto.toFuncionario();

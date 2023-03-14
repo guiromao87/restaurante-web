@@ -16,6 +16,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
     )
     List<Funcionario> findFuncionarios(String nome, String email, BigDecimal salario);
 
-    @Query(value = "select nome, salario from funcionarios", nativeQuery = true)
+    @Query(value = "select f.nome, f.salario, c.nome as cargo  from funcionarios f inner join cargos c  on f.cargo_id = c.id", nativeQuery = true)
     List<FuncionarioProjection> findFuncionario();
 }
