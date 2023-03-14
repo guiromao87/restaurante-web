@@ -9,6 +9,8 @@ public class FuncionarioInputDto {
     private String email;
     private BigDecimal salario;
 
+    private Integer cargoId;
+
     public String getNome() {
         return nome;
     }
@@ -36,4 +38,8 @@ public class FuncionarioInputDto {
     public Funcionario toFuncionario() {
         return new Funcionario(nome, email, salario);
     }
+
+    public Integer getCargoId() {return cargoId;}
+
+    public void setCargoId(Integer cargoId) {this.cargoId = cargoId;}
 }

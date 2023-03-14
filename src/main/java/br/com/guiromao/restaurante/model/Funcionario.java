@@ -14,6 +14,9 @@ public class Funcionario {
     private String email;
     private BigDecimal salario;
 
+    @ManyToOne
+    private Cargo cargo;
+
     public Funcionario() {}
 
     public Funcionario(String nome, String email, BigDecimal salario) {
@@ -33,4 +36,8 @@ public class Funcionario {
     public BigDecimal getSalario() {return salario;}
 
     public void setSalario(BigDecimal salario) {this.salario = salario;}
+
+    public Cargo getCargo() {return cargo;}
+
+    public void setCargo(Cargo cargo) {this.cargo = cargo;}
 }

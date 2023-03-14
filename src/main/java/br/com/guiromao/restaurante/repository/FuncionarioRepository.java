@@ -1,9 +1,7 @@
 package br.com.guiromao.restaurante.repository;
 
 import br.com.guiromao.restaurante.model.Funcionario;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import br.com.guiromao.restaurante.model.projection.FuncionarioProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,4 +15,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
         nativeQuery = true
     )
     List<Funcionario> findFuncionarios(String nome, String email, BigDecimal salario);
+
+    @Query(value = "select nome, salario from funcionarios", nativeQuery = true)
+    List<FuncionarioProjection> findFuncionario();
 }

@@ -1,9 +1,12 @@
 package br.com.guiromao.restaurante.controller;
 
+import br.com.guiromao.restaurante.model.Cargo;
 import br.com.guiromao.restaurante.model.Funcionario;
 import br.com.guiromao.restaurante.model.dto.FuncionarioAlteraInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioInputDto;
 import br.com.guiromao.restaurante.model.dto.FuncionarioOutputDto;
+import br.com.guiromao.restaurante.model.projection.FuncionarioProjection;
+import br.com.guiromao.restaurante.repository.CargoRepository;
 import br.com.guiromao.restaurante.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,11 +26,18 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioRepository funcionarioDao;
 
+    @Autowired
+    private CargoRepository cargoRepository;
+
 
     @Transactional
     @PostMapping
     public ResponseEntity cadastra(@RequestBody FuncionarioInputDto dto) {
+//        Cargo cargo = this.cargoRepository.findById(dto.getCargoId()).get();
+        Cargo cargo = this.cargoRepository.getReferenceById(dto.getCargoId());
+
         Funcionario funcionario = dto.toFuncionario();
+        funcionario.setCargo(cargo);
         funcionarioDao.save(funcionario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
@@ -39,11 +49,8 @@ public class FuncionarioController {
     }
 
     @GetMapping
-    public List<FuncionarioOutputDto> lista() {
-        List<Funcionario> funcionarios = this.funcionarioDao.findAll();
-        List<FuncionarioOutputDto> funcionarioOutputDtoList =  funcionarios.stream().map(funcionario -> new FuncionarioOutputDto(funcionario)).toList();
-
-        return funcionarioOutputDtoList;
+    public List<FuncionarioProjection> lista() {
+        return this.funcionarioDao.findFuncionario();
     }
 
 
