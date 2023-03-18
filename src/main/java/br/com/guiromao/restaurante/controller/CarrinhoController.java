@@ -40,8 +40,8 @@ public class CarrinhoController {
     }
 
     @GetMapping("/detalhe")
-    public String detalhe(HttpSession session, Model model) {
-        model.addAttribute("cliente", session.getAttribute("logado"));
+    public String detalhe(Model model) {
+//        model.addAttribute("cliente", session.getAttribute("logado"));
         model.addAttribute("compras", this.carrinho.getCompras());
         model.addAttribute("total", this.carrinho.getTotal());
 
@@ -57,10 +57,10 @@ public class CarrinhoController {
     }
 
     @PostMapping("/finaliza")
-    public String finaliza(HttpSession session, @RequestParam("endereco") Integer id, Model model) {
-        Cliente cliente = (Cliente) session.getAttribute("logado");
+    public String finaliza(@RequestParam("endereco") Integer id, Model model) {
+//        Cliente cliente = (Cliente) session.getAttribute("logado");
 
-        model.addAttribute("cliente", cliente);
+//        model.addAttribute("cliente", cliente);
         model.addAttribute("compras", this.carrinho.getCompras());
         model.addAttribute("endereco", enderecoDao.findById(id).get());
 

@@ -55,17 +55,4 @@ public class EnderecoController {
 
         return "redirect:/cliente/lista";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

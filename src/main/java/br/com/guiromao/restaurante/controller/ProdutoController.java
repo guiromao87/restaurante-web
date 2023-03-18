@@ -30,10 +30,10 @@ public class ProdutoController {
 
 
     @GetMapping("/lista")
-    public String lista(Model model, HttpSession session) {
+    public String lista(Model model) {
 
-        if(session.getAttribute("logado") == null)
-            return "redirect:/";
+//        if(session.getAttribute("logado") == null)
+//            return "redirect:/";
 
         List<ProdutoOutputDto> produtosDto = dao.findAll().stream().map(produto -> new ProdutoOutputDto(produto)).collect(Collectors.toList());
         model.addAttribute("produtos", produtosDto);

@@ -1,7 +1,8 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
   <h3>Detalhe da compra</h3>
-  Cliente: <span th:text="${session.logado.nome}"></span>
+  Cliente:
+<!--  <span th:text="${session.logado.nome}"></span>-->
 
   <table>
       <tr>
@@ -23,15 +24,15 @@
   Total: <span th:text="${total}"></span>
 
   <h4>Selecione o endereço de entrega:</h4>
-  <form action="/carrinho/finaliza" method="post">
-      <ul>
-          <li th:each="endereco : ${cliente.enderecos}">
-              <input type="radio" name="endereco" th:value="${endereco.id}" th:text="${endereco.rua}">
-          </li>
-      </ul>
-      <br />
-      <input type="submit" value="Finalizar compra">
-  </form>
+<!--  <form action="/carrinho/finaliza" method="post">-->
+<!--      <ul>-->
+<!--          <li th:each="endereco : ${cliente.enderecos}">-->
+<!--              <input type="radio" name="endereco" th:value="${endereco.id}" th:text="${endereco.rua}">-->
+<!--          </li>-->
+<!--      </ul>-->
+<!--      <br />-->
+<!--      <input type="submit" value="Finalizar compra">-->
+<!--  </form>-->
   <br /><br />
     <a th:href="@{/produto/lista}">voltar</a>
   <br /><br />
