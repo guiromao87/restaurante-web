@@ -1,0 +1,2 @@
+insert into usuarios (nome, login, senha) values ('Guilherme', 'gui', '$2a$10$tOPdq7RK/a9UVY2p7gAAsenrHKyDuZPM1q4tphvsgTKEqDq2CeiI.');
+insert into usuarios (nome, login, senha) values ('Rita', 'rita', '$2a$10$kOZjF9uVi5CT/hnzEurAHOCbQrL/CpHdc7bmpuh2GcjMa/GfhXIQu');
