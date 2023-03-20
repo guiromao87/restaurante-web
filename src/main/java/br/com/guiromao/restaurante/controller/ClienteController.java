@@ -7,6 +7,7 @@ import br.com.guiromao.restaurante.model.dto.ClienteInputDto;
 import br.com.guiromao.restaurante.model.dto.ClienteOutputDto;
 import br.com.guiromao.restaurante.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;

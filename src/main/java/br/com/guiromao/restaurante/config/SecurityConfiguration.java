@@ -4,6 +4,8 @@ import br.com.guiromao.restaurante.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,7 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic()
             .and().formLogin().loginPage("/login").permitAll()
             .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .and().authorizeRequests().anyRequest().authenticated();
+            .and().authorizeRequests()
+                .antMatchers("/cliente/**").permitAll()
+                .anyRequest().authenticated();
+
     }
 
     @Override
