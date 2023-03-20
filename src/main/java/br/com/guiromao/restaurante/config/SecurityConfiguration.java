@@ -25,9 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and().formLogin().loginPage("/login").permitAll()
             .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .and().authorizeRequests()
-                .antMatchers("/cliente/**").permitAll()
+                .antMatchers("/cliente/lista").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated();
-
     }
 
     @Override
