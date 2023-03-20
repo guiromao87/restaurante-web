@@ -8,6 +8,7 @@ import br.com.guiromao.restaurante.model.dto.ClienteOutputDto;
 import br.com.guiromao.restaurante.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cliente")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ClienteController {
 
     @Autowired
@@ -38,6 +40,7 @@ public class ClienteController {
         return "redirect:/cliente/lista";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/lista")
     public String lista(Model model) {
         model.addAttribute("clientes",

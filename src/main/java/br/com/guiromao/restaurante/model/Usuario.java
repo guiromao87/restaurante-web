@@ -19,7 +19,7 @@ public class Usuario implements UserDetails {
     private String login;
     private String senha;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Role> roles = new ArrayList<>();
 
     public Integer getId() {
