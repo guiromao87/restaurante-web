@@ -33,7 +33,7 @@ public class ProdutoController {
 
 
     @GetMapping("/lista")
-    public String lista(@AuthenticationPrincipal NewUser newUser, Model model) {
+    public String lista(Model model) {
         List<ProdutoOutputDto> produtosDto = dao.findAll().stream().map(produto -> new ProdutoOutputDto(produto)).collect(Collectors.toList());
         model.addAttribute("produtos", produtosDto);
         return "produtos";

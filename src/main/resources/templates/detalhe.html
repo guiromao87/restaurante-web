@@ -1,5 +1,14 @@
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
+
+    <span sec:authorize="hasRole('ROLE_ADMIN')">
+        Admin: <span th:text="${#authentication.principal.usuario.nome}"></span>
+    </span>
+
+    <span sec:authorize="hasRole('ROLE_USER')">
+        Usuário: <span th:text="${#authentication.principal.usuario.nome}"></span>
+    </span>
+
     <h3>Detalhes do Produto</h3>
 
     <b>Nome:</b> <span th:text="${produto.nome}"></span><br />
@@ -8,14 +17,23 @@
     <b>Preço:</b>  <span th:text="${produto.preco}"></span><br />
 
     <br />
-    <form action="/carrinho/add" method="post">
-        <input type="hidden" name="idProduto" th:value="${produto.id}">
-        <input type="text" name="quantidade" size="3" />
-        <input type="submit" value="Add ao Carrinho" />
-    </form>
+    <span sec:authorize="hasRole('ROLE_USER')">
+        <form th:action="@{/carrinho/add}" method="post">
+            <input type="hidden" name="idProduto" th:value="${produto.id}">
+            <input type="text" name="quantidade" size="3" />
+            <input type="submit" value="Add ao Carrinho" />
+        </form>
+    </span>
 
     <br />
-    <a th:href="@{/produto/lista}">voltar</a>
+    <span sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/produto/lista}">voltar</a>
+    </span>
+    <span sec:authorize="hasRole('ROLE_USER')">
+        <a th:href="@{/home}">voltar</a>
+    </span>
+
+
 
 </body>
 </html>

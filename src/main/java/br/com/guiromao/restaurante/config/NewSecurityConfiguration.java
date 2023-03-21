@@ -18,6 +18,8 @@ public class NewSecurityConfiguration {
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .and().authorizeRequests()
                 .antMatchers("/cliente/lista").hasAnyRole("ADMIN")
+                .antMatchers("/produto/lista").hasAnyRole("ADMIN")
+                .antMatchers("/produto/form").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().exceptionHandling().accessDeniedPage("/negado");
 

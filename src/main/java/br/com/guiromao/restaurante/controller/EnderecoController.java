@@ -1,9 +1,7 @@
 package br.com.guiromao.restaurante.controller;
 
-import br.com.guiromao.restaurante.model.Cliente;
 import br.com.guiromao.restaurante.model.Endereco;
 import br.com.guiromao.restaurante.model.dto.EnderecoInputDto;
-import br.com.guiromao.restaurante.repository.ClienteRepository;
 import br.com.guiromao.restaurante.repository.EnderecoRepository;
 import br.com.guiromao.restaurante.service.CepService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EnderecoController {
 
     @Autowired
-    private ClienteRepository clienteDao;
-
-    @Autowired
     private EnderecoRepository enderecoDao;
 
     @Autowired
@@ -36,7 +31,7 @@ public class EnderecoController {
 
     @GetMapping("/pesquisa")
     public String pesquisa(Integer id, String cep, Model model) {
-        model.addAttribute("cliente", this.clienteDao.findById(id).get());
+//        model.addAttribute("cliente", this.clienteDao.findById(id).get());
         model.addAttribute("cep", cep);
         model.addAttribute("rua", this.cepService.getRua(cep));
 
@@ -44,15 +39,15 @@ public class EnderecoController {
     }
 
 
-    @Transactional
-    @PostMapping("/cadastra")
-    public String cadastra(EnderecoInputDto enderecoInputDto) {
-        Cliente cliente = this.clienteDao.findById(enderecoInputDto.getId()).get();
-        Endereco endereco = enderecoInputDto.toEndereco(cliente);
-
-        this.enderecoDao.save(endereco);
-        cliente.adiciona(endereco);
-
-        return "redirect:/cliente/lista";
-    }
+//    @Transactional
+//    @PostMapping("/cadastra")
+//    public String cadastra(EnderecoInputDto enderecoInputDto) {
+//        Cliente cliente = this.clienteDao.findById(enderecoInputDto.getId()).get();
+//        Endereco endereco = enderecoInputDto.toEndereco(cliente);
+//
+//        this.enderecoDao.save(endereco);
+//        cliente.adiciona(endereco);
+//
+//        return "redirect:/cliente/lista";
+//    }
 }

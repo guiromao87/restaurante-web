@@ -12,14 +12,14 @@ public class Endereco {
     private String cep;
     private String rua;
     @ManyToOne
-    private Cliente cliente;
+    private Usuario usuario;
 
     public Endereco() {}
 
-    public Endereco(String cep, String rua, Cliente cliente) {
+    public Endereco(String cep, String rua, Usuario usuario) {
         this.cep = cep;
         this.rua = rua;
-        this.cliente = cliente;
+        this.usuario = usuario;
     }
 
     public Integer getId() {
@@ -46,5 +46,11 @@ public class Endereco {
         this.rua = rua;
     }
 
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

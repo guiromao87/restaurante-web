@@ -4,30 +4,9 @@
     <script type="text/javascript" th:src="@{/produto/js/produto.js}"></script>
 </head>
 <body>
-    Cliente: <a th:href="@{/carrinho/detalhe}" th:text="${#authentication.principal.usuario.nome}" ></a>
-    <br />
-    <br />
-    <span sec:authorize="hasRole('ROLE_ADMIN')">
-        Este é um admin do sistema.
-    </span>
-    <br /><br />
-    <span sec:authorize-url="/cliente/lista">
-        Se eh o Guilherme aparece eh pq o guilherme pode entrar no lista cliente
-    </span>
-
-    <br /><br />
-    <span sec:authorize="hasRole('ROLE_USER')">
-        Este é um usuario do sistema.
-    </span>
-    <br /><br />
-
-    <a th:href="@{/logout}">sair</a>
-
+    Admin: <span th:text="${#authentication.principal.usuario.nome}" ></span>
     <h3>Lista de Produtos</h3>
-    <a th:href="@{/produto/form}">Cadastra produto</a>
-
     <span th:text="${sucesso}"></span>
-
     <table>
         <tr>
             <td>Id</td>
@@ -51,8 +30,8 @@
         </tr>
     </table>
 
-
-
-
+    <br />
+    <a th:href="@{/home}">voltar</a>
+    <a th:href="@{/logout}">sair</a>
 </body>
 </html>

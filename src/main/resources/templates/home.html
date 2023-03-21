@@ -1,0 +1,37 @@
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    <span sec:authorize="hasRole('ROLE_ADMIN')">
+        <h3>Área Administrativa</h3>
+        Admin logado: <span th:text="${#authentication.principal.usuario.nome}"></span>
+        <br/><br />
+
+        <a th:href="@{/produto/lista}">Lista produtos</a><br />
+        <a th:href="@{/produto/form}">Cadastra produto</a><br />
+
+    </span>
+
+
+    <span sec:authorize="hasRole('ROLE_USER')">
+        Usuário logado: <a th:href="@{/carrinho/detalhe}" th:text="${#authentication.principal.usuario.nome}"></a>
+        <h3>Lista de Produtos</h3>
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>Nome</td>
+                <td>Preço</td>
+            </tr>
+            <tr th:each="produto : ${produtos}">
+                <td>
+                    <a th:href="@{/produto/detalhe/{id}(id=${produto.id})}" th:text="${produto.id}"></a>
+                </td>
+                <td th:text="${produto.nome}"></td>
+                <td th:text="${produto.preco}"></td>
+            </tr>
+        </table>
+    </span>
+
+
+    <br/>
+    <a th:href="@{/logout}">sair</a>
+</body>
+</html>

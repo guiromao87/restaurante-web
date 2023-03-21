@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,9 @@ public class Usuario implements UserDetails {
 
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+    private List<Endereco> enderecos = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -53,6 +57,10 @@ public class Usuario implements UserDetails {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public List<Endereco> getEnderecos() { return Collections.unmodifiableList(enderecos); }
+
+    public void adiciona(Endereco endereco) { this.enderecos.add(endereco); }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

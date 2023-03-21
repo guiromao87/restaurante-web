@@ -1,6 +1,5 @@
 package br.com.guiromao.restaurante.model.dto;
 
-import br.com.guiromao.restaurante.model.Cliente;
 import br.com.guiromao.restaurante.model.Endereco;
 
 public class EnderecoInputDto {
@@ -32,7 +31,7 @@ public class EnderecoInputDto {
         this.rua = rua;
     }
 
-    public Endereco toEndereco(Cliente cliente) {
-        return new Endereco(this.cep, this.rua, cliente);
-    }
+//    public Endereco toEndereco(Cliente cliente) {
+//        return new Endereco(this.cep, this.rua, cliente);
+//    }
 }

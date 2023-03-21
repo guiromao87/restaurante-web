@@ -2,20 +2,19 @@ package br.com.guiromao.restaurante.controller;
 
 
 import br.com.guiromao.restaurante.model.Carrinho;
-import br.com.guiromao.restaurante.model.Cliente;
 import br.com.guiromao.restaurante.model.ItemDeCompra;
+import br.com.guiromao.restaurante.model.NewUser;
 import br.com.guiromao.restaurante.model.Produto;
 import br.com.guiromao.restaurante.repository.EnderecoRepository;
 import br.com.guiromao.restaurante.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/carrinho")
@@ -36,12 +35,12 @@ public class CarrinhoController {
         ItemDeCompra itemDeCompra = new ItemDeCompra(produto, quantidade);
         this.carrinho.add(itemDeCompra);
 
-        return "redirect:/produto/lista";
+        return "redirect:/home";
     }
 
     @GetMapping("/detalhe")
-    public String detalhe(Model model) {
-//        model.addAttribute("cliente", session.getAttribute("logado"));
+    public String detalhe(@AuthenticationPrincipal NewUser user, Model model) {
+        model.addAttribute("enderecos", user.getUsuario().getEnderecos());
         model.addAttribute("compras", this.carrinho.getCompras());
         model.addAttribute("total", this.carrinho.getTotal());
 
@@ -58,9 +57,6 @@ public class CarrinhoController {
 
     @PostMapping("/finaliza")
     public String finaliza(@RequestParam("endereco") Integer id, Model model) {
-//        Cliente cliente = (Cliente) session.getAttribute("logado");
-
-//        model.addAttribute("cliente", cliente);
         model.addAttribute("compras", this.carrinho.getCompras());
         model.addAttribute("endereco", enderecoDao.findById(id).get());
 

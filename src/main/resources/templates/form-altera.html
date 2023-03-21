@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
 
-    <form action="/produto/atualiza" method="POST">
+    <form th:action="@{/produto/atualiza}" method="POST">
         <input type="hidden" name="id" th:value="${produto.id}">
         Nome: <input type="text" name="nome" th:value="${produto.nome}" /><br />
         Descrição: <input type="text" name="descricao" th:value="${produto.descricao}"  /><br />
