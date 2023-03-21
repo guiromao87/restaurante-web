@@ -1,12 +1,26 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link th:href="@{/produto/css/produto.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/produto/js/produto.js}"></script>
 </head>
 <body>
-    Cliente:
+    Cliente: <a th:href="@{/carrinho/detalhe}" th:text="${#authentication.principal.usuario.nome}" ></a>
     <br />
-<!--    <a th:href="@{/carrinho/detalhe}" th:text="${session.logado.nome}" ></a>-->
+    <br />
+    <span sec:authorize="hasRole('ROLE_ADMIN')">
+        Este é um admin do sistema.
+    </span>
+    <br /><br />
+    <span sec:authorize-url="/cliente/lista">
+        Se eh o Guilherme aparece eh pq o guilherme pode entrar no lista cliente
+    </span>
+
+    <br /><br />
+    <span sec:authorize="hasRole('ROLE_USER')">
+        Este é um usuario do sistema.
+    </span>
+    <br /><br />
+
     <a th:href="@{/logout}">sair</a>
 
     <h3>Lista de Produtos</h3>

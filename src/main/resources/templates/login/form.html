@@ -1,8 +1,10 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <body>
     <h3>Login de Usuário do Guilherme</h3>
-    <br />
-<!--    <span th:text="${usuarioInvalido}"></span>-->
+
+    <span th:if="${#bools.isTrue(param.error)}">
+        Usuário ou senha inválidos
+    </span>
     <br />
     <form th:action="@{/login}" method="post">
         Email: <input type="text" name="username" /><br />

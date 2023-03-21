@@ -1,7 +1,12 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
   <h3>Clientes cadastrados</h3>
-  <a th:href="@{/cliente/form}">cadastra cliente</a>
+
+  <span sec:authorize="isAuthenticated()">
+    <a th:href="@{/cliente/form}">cadastra cliente</a>
+  </span>
+
+
   <table>
     <tr>
       <td>id</td>

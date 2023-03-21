@@ -21,7 +21,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cliente")
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ClienteController {
 
     @Autowired
@@ -40,7 +39,7 @@ public class ClienteController {
         return "redirect:/cliente/lista";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @GetMapping("/lista")
     public String lista(Model model) {
         model.addAttribute("clientes",

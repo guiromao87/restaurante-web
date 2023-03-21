@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Configuration
+//@Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,8 +25,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and().formLogin().loginPage("/login").permitAll()
             .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .and().authorizeRequests()
-//                .antMatchers("/cliente/lista").hasAnyRole("USER", "ADMIN")
-                .anyRequest().authenticated();
+                .antMatchers("/cliente/lista").hasAnyRole("ADMIN")
+                .anyRequest().authenticated()
+            .and().exceptionHandling().accessDeniedPage("/negado");
     }
 
     @Override

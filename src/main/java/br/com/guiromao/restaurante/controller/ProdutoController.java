@@ -2,6 +2,7 @@ package br.com.guiromao.restaurante.controller;
 
 
 import br.com.guiromao.restaurante.model.Categoria;
+import br.com.guiromao.restaurante.model.NewUser;
 import br.com.guiromao.restaurante.model.Produto;
 import br.com.guiromao.restaurante.model.dto.ProdutoAlteraInputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoDetalheOutputDto;
@@ -9,6 +10,8 @@ import br.com.guiromao.restaurante.model.dto.ProdutoFormInputDto;
 import br.com.guiromao.restaurante.model.dto.ProdutoOutputDto;
 import br.com.guiromao.restaurante.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -30,11 +33,7 @@ public class ProdutoController {
 
 
     @GetMapping("/lista")
-    public String lista(Model model) {
-
-//        if(session.getAttribute("logado") == null)
-//            return "redirect:/";
-
+    public String lista(@AuthenticationPrincipal NewUser newUser, Model model) {
         List<ProdutoOutputDto> produtosDto = dao.findAll().stream().map(produto -> new ProdutoOutputDto(produto)).collect(Collectors.toList());
         model.addAttribute("produtos", produtosDto);
         return "produtos";
