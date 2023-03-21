@@ -23,6 +23,10 @@ public class Usuario implements UserDetails {
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
 
+    public void setRoles(Role role) {
+        this.roles.add(role);
+    }
+
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -88,4 +92,8 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() { return true; }
+
+    public List<Role> getRoles() {
+        return Collections.unmodifiableList(roles);
+    }
 }

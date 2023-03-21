@@ -13,6 +13,8 @@ public class Role implements GrantedAuthority {
     private Integer id;
     private String nome;
 
+    private String label;
+
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id; }
@@ -21,6 +23,19 @@ public class Role implements GrantedAuthority {
 
     public void setNome(String nome) { this.nome = nome; }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     @Override
     public String getAuthority() { return this.nome; }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }
