@@ -4,11 +4,14 @@ import br.com.guiromao.restaurante.model.Endereco;
 import br.com.guiromao.restaurante.model.Usuario;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UsuarioInputDto {
     private String nome;
     private String login;
     private String senha;
-    private String role;
+    private List<Integer> roleIds = new ArrayList<>();
     private String cep;
     private String rua;
 
@@ -36,12 +39,12 @@ public class UsuarioInputDto {
         this.senha = senha;
     }
 
-    public String getRole() {
-        return role;
+    public List<Integer> getRoleIds() {
+        return roleIds;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleIds(List<Integer> roleIds) {
+        this.roleIds = roleIds;
     }
 
     public String getCep() {

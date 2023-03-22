@@ -23,8 +23,8 @@ public class Usuario implements UserDetails {
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
 
-    public void setRoles(Role role) {
-        this.roles.add(role);
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)

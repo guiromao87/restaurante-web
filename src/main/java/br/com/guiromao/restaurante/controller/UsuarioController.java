@@ -46,23 +46,16 @@ public class UsuarioController {
 
     @PostMapping("/cadastra")
     public String cadastra(UsuarioInputDto usuarioInputDto) {
-        // [ ] admin   [ ] user
-        // usuarioInputDto recebe o ID da role
-        // 1. Criei uma Role com findById - gerou um SELECT
-        // 2. Criei uma Role com getReferenceById - NÃO gerou um SELECT
-        // 3. Criei um Role com new e seto o id
 
-        Role role = new Role();
-        role.setId(2);
+        List<Role> roles = usuarioInputDto.getRoleIds().stream().map(id -> new Role(id)).toList();
 
         Usuario usuario = usuarioInputDto.toUsuario();
-        usuario.setRoles(role);
+        usuario.setRoles(roles);
         this.usuarioRepository.save(usuario);
 
         Endereco endereco = usuarioInputDto.toEndereco();
         endereco.setUsuario(usuario);
         this.enderecoRepository.save(endereco);
-
 
         return "redirect:/usuario/lista";
     }
